@@ -1,4 +1,5 @@
 from django.db import models
+from ..users.models import User
 
 
 class BaseModel(models.Model):
@@ -23,6 +24,7 @@ class DrugPrescription(BaseModel):
 
 
 class Receipt(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     disease = models.CharField(max_length=255)
 
     drugs = models.ManyToManyField(Drug, related_name='prescribed_drugs', through=DrugPrescription)
