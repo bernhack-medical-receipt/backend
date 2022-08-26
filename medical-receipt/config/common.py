@@ -24,6 +24,7 @@ class Common(Configuration):
 
         # Your apps
         'medical-receipt.users',
+        'medical-receipt.receipts',
 
     )
 
