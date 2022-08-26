@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .models import Receipt
 from .serializers import ReceiptSerializer
 
+from rest_framework import views
+
 
 class ReceiptViewSet(viewsets.ModelViewSet):
     """
@@ -13,19 +15,10 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     queryset = Receipt.objects.all()
     serializer_class = ReceiptSerializer
 
-    # def retrieve(self, request, pk=None):
-    #     receipt = self.get_object()
-    #     serializer = self.serializer_class(receipt)
-    #     return Response(serializer.data)
 
-    @action(detail=False)
-    def recent_users(self, request):
-        recent_users = User.objects.all().order_by('-last_login')
+class UserReceiptView(views.APIView):
 
-        page = self.paginate_queryset(recent_users)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(recent_users, many=True)
+    def get(self, request, user_id: str):
+        qs = Receipt.objects.filter(user=user_id)
+        serializer = ReceiptSerializer(qs, many=True)
         return Response(serializer.data)
