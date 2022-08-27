@@ -7,8 +7,15 @@ from django.db.models.signals import post_save
 from rest_framework.authtoken.models import Token
 
 
+class UserTypeChoices(models.TextChoices):
+    USER = 'USER', 'User'
+    DOCTOR = 'DOC', 'Doctor'
+    PHARMACIST = 'PHAR', 'Pharmacist'
+
+
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    role = models.CharField(max_length=4, choices=UserTypeChoices.choices, default=UserTypeChoices.USER)
 
     def __str__(self):
         return self.username
