@@ -3,11 +3,10 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name',)
-        read_only_fields = ('username', )
+        fields = ('id', 'username', 'first_name', 'last_name', 'role')
+        read_only_fields = ('username',)
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -20,6 +19,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'auth_token',)
-        read_only_fields = ('auth_token',)
+        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email', 'role', 'auth_token',)
+        read_only_fields = ('auth_token', 'role')
         extra_kwargs = {'password': {'write_only': True}}
