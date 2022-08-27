@@ -12,6 +12,13 @@ class BaseModel(models.Model):
 
 class Drug(BaseModel):
     title = models.CharField(max_length=255)
+    license_owner = models.TextField()
+    category = models.TextField()
+    package_size = models.TextField()
+    unit = models.TextField()
+    active_ingredients = models.TextField()
+    ingredients = models.TextField()
+    application = models.TextField()
 
     def __str__(self):
         return f'Drug {self.title}'
