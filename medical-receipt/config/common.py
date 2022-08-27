@@ -21,6 +21,7 @@ class Common(Configuration):
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
+        'corsheaders',
 
         # Your apps
         'medical-receipt.users',
@@ -31,6 +32,7 @@ class Common(Configuration):
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
     MIDDLEWARE = (
         'django.middleware.security.SecurityMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
@@ -43,7 +45,9 @@ class Common(Configuration):
     CORS_ALLOW_ALL_ORIGINS = True
     CSRF_TRUSTED_ORIGINS = [
         "https://med-api.mustafin.dev",
-        "http://localhost:8000"
+        "http://localhost:8000",
+        "http://localhost:3000"
+
     ]
     ROOT_URLCONF = 'medical-receipt.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
