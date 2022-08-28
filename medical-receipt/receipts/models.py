@@ -35,3 +35,6 @@ class Receipt(BaseModel):
     disease = models.CharField(max_length=255)
 
     drugs = models.ManyToManyField(Drug, related_name='prescribed_drugs', through=DrugPrescription)
+
+    def __str__(self):
+        return f'Receipt #{self.id} for {self.user}'
