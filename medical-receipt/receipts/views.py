@@ -26,7 +26,7 @@ class UserReceiptByUserView(views.APIView):
 
     def get(self, request, user_id: str):
         # block users from watching others' receipts
-        if request.user.role in (UserTypeChoices.PHARMACIST, UserTypeChoices.PHARMACIST) or request.user.id == user_id:
+        if request.user.role in (UserTypeChoices.PHARMACIST, UserTypeChoices.DOCTOR) or request.user.id == user_id:
             qs = Receipt.objects.filter(user=user_id)
             serializer = ReceiptSerializer(qs, many=True)
             return Response(serializer.data)
