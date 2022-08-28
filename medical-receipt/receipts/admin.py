@@ -9,7 +9,7 @@ class DrugsInline(admin.TabularInline):
 
 @admin.register(Drug)
 class DrugAdmin(admin.ModelAdmin):
-    search_fields = ['title', 'description']
+    search_fields = ['title']
     list_display = ('title', 'category', 'package_size')
     list_filter = ('category', )
 
